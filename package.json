@@ -26,7 +26,6 @@
     "mongoose": "^7.4.5",
     "mysql2": "^3.6.0",
     "sequelize": "^6.32.1",
-    "sequelize-cli": "^6.6.1",
     "xlsx": "^0.18.5"
   }
 }
