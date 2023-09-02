@@ -1,20 +1,20 @@
 import express from "express";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import cors from "cors";
-import cookieParser from "cookie-parser";
-import db from "./config/Database.js";
-import router from "./routes/index.js";
+// import cookieParser from "cookie-parser";
+// import db from "./config/Database.js";
+// import router from "./routes/index.js";
 
-dotenv.config();
+// dotenv.config();
 const app = express();
 
-//koneksi
-try {
-  await db.authenticate();
-  console.log("DataBase Connected...");
-} catch (error) {
-  console.error(error);
-}
+// //koneksi
+// try {
+//   await db.authenticate();
+//   console.log("DataBase Connected...");
+// } catch (error) {
+//   console.error(error);
+// }
 
 app.use(
   cors({
@@ -31,9 +31,9 @@ app.get("/", function (req, res) {
   res.json({ nama: "Susscess" });
 });
 
-app.use(cookieParser());
-app.use(express.json());
-app.use(router);
+// app.use(cookieParser());
+// app.use(express.json());
+// app.use(router);
 
 const PORT = process.env.PORT || 9000;
 app.listen(PORT);
