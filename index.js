@@ -9,12 +9,12 @@ dotenv.config();
 const app = express();
 
 //koneksi
-// try {
-//   await db.authenticate();
-//   console.log("DataBase Connected...");
-// } catch (error) {
-//   console.error(error);
-// }
+try {
+  await db.authenticate();
+  console.log("DataBase Connected...");
+} catch (error) {
+  console.error(error);
+}
 
 app.use(
   cors({
