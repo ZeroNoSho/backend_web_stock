@@ -2,19 +2,19 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import db from "./config/database.js";
+// import db from "./config/database.js";
 // import router from "./routes/index.js";
 
 dotenv.config();
 const app = express();
 
 //koneksi
-try {
-  await db.authenticate();
-  console.log("DataBase Connected...");
-} catch (error) {
-  console.error(error);
-}
+// try {
+//   await db.authenticate();
+//   console.log("DataBase Connected...");
+// } catch (error) {
+//   console.error(error);
+// }
 
 app.use(
   cors({
