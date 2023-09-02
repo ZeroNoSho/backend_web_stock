@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import db from "./config/database.js";
+// import db from "./config/database.js";
 // import router from "./routes/index.js";
 
 dotenv.config();
@@ -31,8 +31,8 @@ app.get("/", function (req, res) {
   res.json({ nama: "Susscess" });
 });
 
-// app.use(cookieParser());
-// app.use(express.json());
+app.use(cookieParser());
+app.use(express.json());
 // app.use(router);
 
 const PORT = process.env.PORT || 5000;
