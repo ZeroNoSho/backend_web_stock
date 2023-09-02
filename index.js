@@ -26,7 +26,9 @@ app.use(
     maxAge: 600,
   })
 );
-
+app.get("/", function (req, res) {
+  res.json({ nama: "Susscess" });
+});
 app.use(cookieParser());
 app.use(express.json());
 app.use(router);
