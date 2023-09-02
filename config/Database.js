@@ -11,7 +11,6 @@ const db = new Sequelize(process.env.DB, process.env.USER, process.env.PASS, {
     acquire: 30000,
     idle: 10000,
   },
-  benchmark: true,
   operationsAliases: false,
 });
 
