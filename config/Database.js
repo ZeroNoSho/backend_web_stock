@@ -1,7 +1,9 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-const db = new Sequelize("sql12643768" || process.env.DB, "sql12643768" || process.env.USER, "yvYE3d1GFT" || process.env.PASS, {
-  host: "sql12.freesqldatabase.com" || process.env.HOST,
+dotenv.config();
+const db = new Sequelize(process.env.DB, process.env.USER, process.env.PASS, {
+  host: process.env.HOST,
   dialect: "mysql",
 });
 
