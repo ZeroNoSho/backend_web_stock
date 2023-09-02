@@ -11,7 +11,6 @@ const app = express();
 //koneksi
 try {
   await db.authenticate();
-  console.log("DataBase Connected...");
 } catch (error) {
   console.error(error);
 }
