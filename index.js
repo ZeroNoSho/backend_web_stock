@@ -26,6 +26,7 @@ app.use(
     maxAge: 600,
   })
 );
+
 app.get("/", function (req, res) {
   res.json({ nama: "Susscess" });
 });
