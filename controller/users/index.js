@@ -2,7 +2,7 @@ import Users from "../../models/Usermodel/index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const getUser = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     const users = await Users.findAll();
     res.json(users);
@@ -11,7 +11,7 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const Register = async (req, res) => {
+const Register = async (req, res) => {
   const { name, password, confpass } = req.body;
   if (password !== confpass) {
     return res.status(400).json({ msg: "password tidak sama dengan confirm" });
@@ -29,7 +29,7 @@ export const Register = async (req, res) => {
   }
 };
 
-export const Login = async (req, res) => {
+const Login = async (req, res) => {
   try {
     const user = await Users.findOne({
       where: {
@@ -70,7 +70,7 @@ export const Login = async (req, res) => {
   }
 };
 
-export const Logout = async (req, res) => {
+const Logout = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) return res.sendStatus(204);
   const user = await Users.findAll({
@@ -91,3 +91,5 @@ export const Logout = async (req, res) => {
   res.clearCookie("refreshToken");
   return res.sendStatus(200);
 };
+
+export { Login, Logout, Register, getUser };

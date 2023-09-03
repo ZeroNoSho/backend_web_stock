@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
-import { Login } from "../controller/index.js";
+import { Login } from "../controller/users/index.js";
 // import router from "../routes/index.js";
 
 dotenv.config();
