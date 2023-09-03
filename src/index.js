@@ -18,6 +18,88 @@ try {
   console.error(error);
 }
 
+//bahan
+const SetBahanbaku = async (req, res) => {
+  const { nama, jenis, stok } = req.body;
+  const product = await BahanBaku.findOne({
+    where: {
+      nama: nama,
+    },
+  });
+  if (product) return res.json({ msg: "sudah ada" });
+
+  try {
+    await BahanBaku.create({
+      nama: nama,
+      jenis: jenis,
+      stok: stok,
+      tipe: "Bahan",
+    });
+    res.json({ msg: "berhasil menambahkan" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const UpdateBahanbaku = async (req, res) => {
+  const product = await BahanBaku.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+
+  const { nama, jenis, stok } = req.body;
+  try {
+    await BahanBaku.update(
+      { nama: nama, jenis: jenis, stok: stok },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "berhasil di update" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const DelBahanbaku = async (req, res) => {
+  const product = await BahanBaku.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+  try {
+    await BahanBaku.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ msg: "berhasil di hapus" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const GetBahanbakuSerch = async (req, res) => {
+  const search = req.query.search_query || "";
+  const result = await BahanBaku.findAll({
+    where: {
+      [Op.or]: [
+        {
+          nama: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+      ],
+    },
+  });
+  res.json({
+    result: result,
+  });
+};
+
+//barang
 const setBarang = async (req, res) => {
   const { nama, jenis, stok } = req.body;
   const product = await DataBarang.findOne({
@@ -116,6 +198,11 @@ app.post("/Barang", setBarang);
 app.patch("/Barang/:id", updateBarang);
 app.delete("/Barang/:id", delBarang);
 app.get("/Barang/serch", getBarangSerch);
+
+app.post("/Bahanbaku", SetBahanbaku);
+app.patch("/Bahanbaku/:id", UpdateBahanbaku);
+app.delete("/Bahanbaku/:id", DelBahanbaku);
+app.get("/Bahanbaku/serch", GetBahanbakuSerch);
 
 app.use(cookieParser());
 app.use(express.json());
