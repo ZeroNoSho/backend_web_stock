@@ -5,15 +5,13 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
-import * as XLSX from "xlsx/xlsx.mjs";
-import * as fs from "fs";
 import { verifyToken } from "../middleware/index.js";
 import { Op } from "sequelize";
 import { BahanBaku, DataBarang, Jenis, Produksi, Transaksi, Users } from "../models/index.js";
 
 dotenv.config();
 const app = express();
-XLSX.set_fs(fs);
+
 //koneksi
 try {
   await db.authenticate();
@@ -404,57 +402,6 @@ const delProduksi = async (req, res) => {
   }
 };
 
-//pembelian
-export const getPembelian = async (req, res) => {
-  const number = parseInt(req.query.limit) || 100;
-  try {
-    const Barang = await DataBarang.findAll();
-    const Bahan = await BahanBaku.findAll();
-    const arrayall = [...Bahan, ...Barang];
-    const all = [];
-
-    arrayall.forEach((item) => {
-      if (item.stok <= number) {
-        all.push(item);
-      }
-    });
-
-    res.json(all);
-  } catch (error) {
-    console.error(error);
-  }
-};
-export const getPembeliansrch = async (req, res) => {
-  const search = req.query.search_query || "";
-  const Barang = await DataBarang.findAll();
-
-  const Bahan = await BahanBaku.findAll();
-
-  const arrayall = [...Bahan, ...Barang];
-
-  const searchResults = arrayall.filter((item) => item.nama.includes(search));
-
-  res.json(searchResults);
-};
-export const getPembelianExel = async (req, res) => {
-  const Barang = await DataBarang.findAll();
-  const Bahan = await BahanBaku.findAll();
-
-  const arrayall = [...Bahan, ...Barang];
-  const heading = [["Nama Barang / Bahan", " satuan", "stok", "tipe", "createdAt", "updatedAt"]];
-
-  const multiDimensionalArray = arrayall.map((obj) => [obj.nama, obj.jenis, obj.stok, obj.tipe, obj.createdAt.toString(), obj.updatedAt.toString()]);
-
-  const workbook = XLSX.utils.book_new();
-  const worksheet = XLSX.utils.aoa_to_sheet(multiDimensionalArray);
-
-  XLSX.utils.sheet_add_aoa(worksheet, heading);
-  XLSX.utils.book_append_sheet(workbook, worksheet, "books");
-
-  const buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
-  res.attachment("PersedianData.xlsx");
-  return res.send(buffer);
-};
 
 app.use(
   cors({
@@ -497,11 +444,6 @@ app.get("/Produksi/serch", verifyToken, getProduksibakuSerch);
 app.post("/Produksi", verifyToken, setProduksi);
 app.delete("/Produksi/:id", verifyToken, delProduksi);
 app.patch("/Produksi/:id", verifyToken, updateProduksi);
-
-//pembelian
-app.get("/Pembelian", verifyToken, getPembelian);
-app.get("/Pembelian/serch", verifyToken, getPembeliansrch);
-app.get("/Pembelian/exel", getPembelianExel);
 
 app.use(cookieParser());
 app.use(express.json());
