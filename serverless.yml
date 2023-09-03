@@ -1,0 +1,8 @@
+provider:
+  environment:
+    DB_DIALECT: "mysql"
+    DB_NAME: "sql12643768"
+    DB_USERNAME: "sql12643768"
+    DB_PASSWORD: "yvYE3d1GFT"
+    DB_HOST: "sql12.freesqldatabase.com"
+    DB_PORT: "9002"
