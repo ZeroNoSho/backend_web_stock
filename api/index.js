@@ -1,6 +1,4 @@
-import app from "../src/index";
-app.get("/api/item/:slug", (req, res) => {
-  const { slug } = req.params;
-  res.end(`Item: ${slug}`);
-});
+import app from "../src/index.js";
+
+
 export default app;
