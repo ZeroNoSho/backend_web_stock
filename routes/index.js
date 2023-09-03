@@ -1,13 +1,37 @@
 import express from "express";
-import { Login, Logout, Register, getUser } from "../controllers/users/index.js";
 import { verifyToken } from "../middleware/index.js";
-import { refreshToken } from "../controllers/refrshtoken/index.js";
-import { delJenis, getJenisSerch, setJenis, updateJenis } from "../controllers/jenis/index.js";
-import { delBarang, getBarangSerch, setBarang, updateBarang } from "../controllers/databarang/index.js";
-import { delBahanbaku, getBahanbakuSerch, setBahanbaku, updateBahanbaku } from "../controllers/bahanbaku/index.js";
-import { delTransaksi, getTransaksiExel, getTransaksiSerch, setTransaksiKeluar, setTransaksiMasuk, updateTransaksi } from "../controllers/transaksi/index.js";
-import { getPembelian, getPembelianExel, getPembeliansrch } from "../controllers/rpembelian/index.js";
-import { delProduksi, getProduksibakuSerch, setProduksi, updateProduksi } from "../controllers/produksi/index.js";
+import {
+  Login,
+  Logout,
+  Register,
+  getUser,
+  delTransaksi,
+  getTransaksiExel,
+  getTransaksiSerch,
+  setTransaksiKeluar,
+  setTransaksiMasuk,
+  updateTransaksi,
+  refreshToken,
+  delJenis,
+  getJenisSerch,
+  setJenis,
+  updateJenis,
+  delBarang,
+  getBarangSerch,
+  setBarang,
+  updateBarang,
+  delBahanbaku,
+  getBahanbakuSerch,
+  setBahanbaku,
+  updateBahanbaku,
+  getPembelian,
+  getPembelianExel,
+  getPembeliansrch,
+  delProduksi,
+  getProduksibakuSerch,
+  setProduksi,
+  updateProduksi,
+} from "../controllers/index.js";
 
 const router = express.Router();
 
