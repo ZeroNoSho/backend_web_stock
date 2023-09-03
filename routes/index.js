@@ -1,42 +1,10 @@
 import express from "express";
 import { verifyToken } from "../middleware/index.js";
-import { Login } from "../users/index.js";
-// import {
-//   Login,
-//   Logout,
-//   Register,
-//   getUser,
-//   delTransaksi,
-//   getTransaksiExel,
-//   getTransaksiSerch,
-//   setTransaksiKeluar,
-//   setTransaksiMasuk,
-//   updateTransaksi,
-//   refreshToken,
-//   delJenis,
-//   getJenisSerch,
-//   setJenis,
-//   updateJenis,
-//   delBarang,
-//   getBarangSerch,
-//   setBarang,
-//   updateBarang,
-//   delBahanbaku,
-//   getBahanbakuSerch,
-//   setBahanbaku,
-//   updateBahanbaku,
-//   getPembelian,
-//   getPembelianExel,
-//   getPembeliansrch,
-//   delProduksi,
-//   getProduksibakuSerch,
-//   setProduksi,
-//   updateProduksi,
-// } from "../controllers/index.js";
+import { getPembelian, getPembelianExel, getPembeliansrch } from "../controllers/index.js";
 
 const router = express.Router();
 
-// //login
+//login
 // router.get("/users", verifyToken, getUser);
 // router.post("/users", Register);
 // router.post("/login", Login);
@@ -75,9 +43,9 @@ const router = express.Router();
 // router.get("/Transaksi/serch", verifyToken, getTransaksiSerch);
 // router.get("/Transaksi/exel", getTransaksiExel);
 
-// //Rencana Pembelian
-// router.get("/Pembelian", verifyToken, getPembelian);
-// router.get("/Pembelian/serch", verifyToken, getPembeliansrch);
-// router.get("/Pembelian/exel", getPembelianExel);
+//Rencana Pembelian
+router.get("/Pembelian", verifyToken, getPembelian);
+router.get("/Pembelian/serch", verifyToken, getPembeliansrch);
+router.get("/Pembelian/exel", getPembelianExel);
 
 export default router;
