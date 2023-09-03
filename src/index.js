@@ -3,38 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
-import {
-  Login,
-  Logout,
-  Register,
-  getUser,
-  delTransaksi,
-  getTransaksiExel,
-  getTransaksiSerch,
-  setTransaksiKeluar,
-  setTransaksiMasuk,
-  updateTransaksi,
-  refreshToken,
-  delJenis,
-  getJenisSerch,
-  setJenis,
-  updateJenis,
-  delBarang,
-  getBarangSerch,
-  setBarang,
-  updateBarang,
-  delBahanbaku,
-  getBahanbakuSerch,
-  setBahanbaku,
-  updateBahanbaku,
-  getPembelian,
-  getPembelianExel,
-  getPembeliansrch,
-  delProduksi,
-  getProduksibakuSerch,
-  setProduksi,
-  updateProduksi,
-} from "../controller/index.js";
+import { Login } from "../controller/index.js";
 // import router from "../routes/index.js";
 
 dotenv.config();
@@ -62,7 +31,6 @@ app.use(
 app.get("/", function (req, res) {
   res.json({ nama: "Susscess" });
 });
-app.get("/Bahanbaku", getBahanbaku);
 
 app.use(cookieParser());
 app.use(express.json());
