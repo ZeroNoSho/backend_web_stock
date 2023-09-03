@@ -63,9 +63,6 @@ app.get("/", function (req, res) {
   res.json({ nama: "Susscess" });
 });
 
-app.use(cookieParser());
-app.use(express.json());
-
 //login
 app.get("/users", verifyToken, getUser);
 app.post("/users", Register);
@@ -109,6 +106,9 @@ app.get("/Transaksi/exel", getTransaksiExel);
 app.get("/Pembelian", verifyToken, getPembelian);
 app.get("/Pembelian/serch", verifyToken, getPembeliansrch);
 app.get("/Pembelian/exel", getPembelianExel);
+
+app.use(cookieParser());
+app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
