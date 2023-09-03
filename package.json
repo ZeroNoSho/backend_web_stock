@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "local": "serverless offline start --stage local"
+    "local": "serverless offline start --stage local",
+    "vercel-build": "echo hello"
   },
   "keywords": [],
   "author": "",
