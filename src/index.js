@@ -1,14 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
+import * as XLSX from "xlsx/xlsx.mjs";
+import * as fs from "fs";
+import { verifyToken } from "../middleware/index.js";
 import { Op } from "sequelize";
 import { BahanBaku, DataBarang, Jenis, Produksi, Transaksi, Users } from "../models/index.js";
 
 dotenv.config();
 const app = express();
-
+XLSX.set_fs(fs);
 //koneksi
 try {
   await db.authenticate();
@@ -161,7 +166,295 @@ const Logout = async (req, res) => {
   return res.sendStatus(200);
 };
 
+//jenis
+const setJenis = async (req, res) => {
+  const jenis = req.body.jenis;
+  const product = await Jenis.findOne({
+    where: {
+      jenis: jenis,
+    },
+  });
 
+  if (product) return res.json({ msg: "sudah ada" });
+
+  try {
+    await Jenis.create({
+      jenis: jenis,
+    });
+    res.json({ msg: "berhasil menambahkan" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const updateJenis = async (req, res) => {
+  const product = await Jenis.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+
+  const jenis = req.body.jenis;
+  try {
+    await Jenis.update(
+      { jenis: jenis },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "berhasil di update" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const delJenis = async (req, res) => {
+  const product = await Jenis.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+  try {
+    await Jenis.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ msg: "berhasil di hapus" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const getJenisSerch = async (req, res) => {
+  const search = req.query.search_query || "";
+  const result = await Jenis.findAll({
+    where: {
+      [Op.or]: [
+        {
+          jenis: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+      ],
+    },
+  });
+  res.json({
+    result: result,
+  });
+};
+
+//Barang
+const setBarang = async (req, res) => {
+  const { nama, jenis, stok } = req.body;
+  const product = await DataBarang.findOne({
+    where: {
+      nama: nama,
+    },
+  });
+  if (product) return res.json({ msg: "sudah ada" });
+
+  try {
+    await DataBarang.create({
+      nama: nama,
+      jenis: jenis,
+      stok: stok,
+      tipe: "Barang",
+    });
+    res.json({ msg: "berhasil menambahkan" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const updateBarang = async (req, res) => {
+  const product = await DataBarang.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+
+  const { nama, jenis, stok } = req.body;
+  try {
+    await DataBarang.update(
+      { nama: nama, jenis: jenis, stok: stok },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "berhasil di update" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const delBarang = async (req, res) => {
+  const product = await DataBarang.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+  try {
+    await DataBarang.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ msg: "berhasil di hapus" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const getBarangSerch = async (req, res) => {
+  const search = req.query.search_query || "";
+  const result = await DataBarang.findAll({
+    where: {
+      [Op.or]: [
+        {
+          nama: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+      ],
+    },
+  });
+  res.json({
+    result: result,
+  });
+};
+
+//Produksi
+const getProduksibakuSerch = async (req, res) => {
+  const search = req.query.search_query || "";
+  const result = await Produksi.findAll({
+    where: {
+      [Op.or]: [
+        {
+          nama: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+      ],
+    },
+  });
+  res.json({
+    result: result,
+  });
+};
+const setProduksi = async (req, res) => {
+  const { nama, jenis, jumlah } = req.body;
+  try {
+    await Produksi.create({
+      nama: nama,
+      jumlah: jumlah,
+      jenis: jenis,
+    });
+
+    res.json({ msg: "berhasil menambahkan" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const updateProduksi = async (req, res) => {
+  const product = await Produksi.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+
+  const { nama, jenis, jumlah } = req.body;
+  try {
+    await Produksi.update(
+      {
+        nama: nama,
+        jumlah: jumlah,
+        jenis: jenis,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "berhasil di update" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const delProduksi = async (req, res) => {
+  const product = await Produksi.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+  try {
+    await Produksi.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ msg: "berhasil di hapus" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+//pembelian
+export const getPembelian = async (req, res) => {
+  const number = parseInt(req.query.limit) || 100;
+  try {
+    const Barang = await DataBarang.findAll();
+    const Bahan = await BahanBaku.findAll();
+    const arrayall = [...Bahan, ...Barang];
+    const all = [];
+
+    arrayall.forEach((item) => {
+      if (item.stok <= number) {
+        all.push(item);
+      }
+    });
+
+    res.json(all);
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const getPembeliansrch = async (req, res) => {
+  const search = req.query.search_query || "";
+  const Barang = await DataBarang.findAll();
+
+  const Bahan = await BahanBaku.findAll();
+
+  const arrayall = [...Bahan, ...Barang];
+
+  const searchResults = arrayall.filter((item) => item.nama.includes(search));
+
+  res.json(searchResults);
+};
+export const getPembelianExel = async (req, res) => {
+  const Barang = await DataBarang.findAll();
+  const Bahan = await BahanBaku.findAll();
+
+  const arrayall = [...Bahan, ...Barang];
+  const heading = [["Nama Barang / Bahan", " satuan", "stok", "tipe", "createdAt", "updatedAt"]];
+
+  const multiDimensionalArray = arrayall.map((obj) => [obj.nama, obj.jenis, obj.stok, obj.tipe, obj.createdAt.toString(), obj.updatedAt.toString()]);
+
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.aoa_to_sheet(multiDimensionalArray);
+
+  XLSX.utils.sheet_add_aoa(worksheet, heading);
+  XLSX.utils.book_append_sheet(workbook, worksheet, "books");
+
+  const buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+  res.attachment("PersedianData.xlsx");
+  return res.send(buffer);
+};
 
 app.use(
   cors({
@@ -186,6 +479,29 @@ app.get("/Bahanbaku/serch", getBahanbakuSerch);
 //user
 app.post("/login", Login);
 app.delete("/logout", Logout);
+
+//jenis
+app.post("/Jenis", setJenis);
+app.patch("/Jenis/:id", updateJenis);
+app.delete("/Jenis/:id", delJenis);
+app.get("/Jenis/serch", getJenisSerch);
+
+//Barang
+app.post("/Barang", verifyToken, setBarang);
+app.patch("/Barang/:id", verifyToken, updateBarang);
+app.delete("/Barang/:id", verifyToken, delBarang);
+app.get("/Barang/serch", verifyToken, getBarangSerch);
+
+//produksi
+app.get("/Produksi/serch", verifyToken, getProduksibakuSerch);
+app.post("/Produksi", verifyToken, setProduksi);
+app.delete("/Produksi/:id", verifyToken, delProduksi);
+app.patch("/Produksi/:id", verifyToken, updateProduksi);
+
+//pembelian
+app.get("/Pembelian", verifyToken, getPembelian);
+app.get("/Pembelian/serch", verifyToken, getPembeliansrch);
+app.get("/Pembelian/exel", getPembelianExel);
 
 app.use(cookieParser());
 app.use(express.json());
