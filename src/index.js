@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import mysql from "mysql2";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-// import router from "./routes/index.js";
+import router from "./routes/index.js";
 
 dotenv.config();
 const app = express();
