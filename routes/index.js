@@ -67,12 +67,12 @@ router.delete("/logout", Logout);
 // router.patch("/Produksi/:id", verifyToken, updateProduksi);
 
 //transaksi Masuk
-router.post("/Transaksi/Masuk", verifyToken, setTransaksiMasuk);
-router.post("/Transaksi/Keluar", verifyToken, setTransaksiKeluar);
-router.patch("/Transaksi/:id", updateTransaksi);
-router.delete("/Transaksi/:id", verifyToken, delTransaksi);
-router.get("/Transaksi/serch", verifyToken, getTransaksiSerch);
-router.get("/Transaksi/exel", getTransaksiExel);
+// router.post("/Transaksi/Masuk", verifyToken, setTransaksiMasuk);
+// router.post("/Transaksi/Keluar", verifyToken, setTransaksiKeluar);
+// router.patch("/Transaksi/:id", updateTransaksi);
+// router.delete("/Transaksi/:id", verifyToken, delTransaksi);
+// router.get("/Transaksi/serch", verifyToken, getTransaksiSerch);
+// router.get("/Transaksi/exel", getTransaksiExel);
 
 //Rencana Pembelian
 router.get("/Pembelian", verifyToken, getPembelian);
