@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
-import { verifyToken } from "../middleware/index.js";
 import { Op } from "sequelize";
 import { BahanBaku, DataBarang, Jenis, Produksi, Transaksi, Users } from "../models/index.js";
 
@@ -402,7 +401,6 @@ const delProduksi = async (req, res) => {
   }
 };
 
-
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -434,16 +432,16 @@ app.delete("/Jenis/:id", delJenis);
 app.get("/Jenis/serch", getJenisSerch);
 
 //Barang
-app.post("/Barang", verifyToken, setBarang);
-app.patch("/Barang/:id", verifyToken, updateBarang);
-app.delete("/Barang/:id", verifyToken, delBarang);
-app.get("/Barang/serch", verifyToken, getBarangSerch);
+app.post("/Barang", setBarang);
+app.patch("/Barang/:id", updateBarang);
+app.delete("/Barang/:id", delBarang);
+app.get("/Barang/serch", getBarangSerch);
 
 //produksi
-app.get("/Produksi/serch", verifyToken, getProduksibakuSerch);
-app.post("/Produksi", verifyToken, setProduksi);
-app.delete("/Produksi/:id", verifyToken, delProduksi);
-app.patch("/Produksi/:id", verifyToken, updateProduksi);
+app.get("/Produksi/serch", getProduksibakuSerch);
+app.post("/Produksi", setProduksi);
+app.delete("/Produksi/:id", delProduksi);
+app.patch("/Produksi/:id", updateProduksi);
 
 app.use(cookieParser());
 app.use(express.json());
