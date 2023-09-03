@@ -1,6 +1,6 @@
 import express from "express";
 import { Login, Logout, Register, getUser } from "../controllers/users/index.js";
-import { verifyToken } from "../middleware/verifyToken.js";
+import { verifyToken } from "../middleware/index.js";
 import { refreshToken } from "../controllers/refrshtoken/index.js";
 import { delJenis, getJenisSerch, setJenis, updateJenis } from "../controllers/jenis/index.js";
 import { delBarang, getBarangSerch, setBarang, updateBarang } from "../controllers/databarang/index.js";
