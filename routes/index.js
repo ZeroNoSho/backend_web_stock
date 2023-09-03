@@ -43,10 +43,10 @@ router.get("/token", refreshToken);
 router.delete("/logout", Logout);
 
 //master jenis
-router.post("/Jenis", verifyToken, setJenis);
-router.patch("/Jenis/:id", verifyToken, updateJenis);
-router.delete("/Jenis/:id", verifyToken, delJenis);
-router.get("/Jenis/serch", verifyToken, getJenisSerch);
+// router.post("/Jenis", verifyToken, setJenis);
+// router.patch("/Jenis/:id", verifyToken, updateJenis);
+// router.delete("/Jenis/:id", verifyToken, delJenis);
+// router.get("/Jenis/serch", verifyToken, getJenisSerch);
 
 //master data barang
 // router.post("/Barang", verifyToken, setBarang);
