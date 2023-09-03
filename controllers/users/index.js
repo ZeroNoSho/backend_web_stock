@@ -1,4 +1,4 @@
-import { Users } from "../../models/index.js";
+import Users from "../../models/Usermodel/index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -41,7 +41,7 @@ export const Login = async (req, res) => {
     if (!match) return res.status(400).json({ msg: "Wrong Password" });
     const UserId = user.id;
     const name = user.name;
-  
+
     const accessToken = jwt.sign({ UserId, name }, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: "20s",
     });
