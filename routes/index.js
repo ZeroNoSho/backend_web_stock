@@ -75,8 +75,8 @@ router.delete("/logout", Logout);
 // router.get("/Transaksi/exel", getTransaksiExel);
 
 //Rencana Pembelian
-router.get("/Pembelian", verifyToken, getPembelian);
-router.get("/Pembelian/serch", verifyToken, getPembeliansrch);
-router.get("/Pembelian/exel", getPembelianExel);
+// router.get("/Pembelian", verifyToken, getPembelian);
+// router.get("/Pembelian/serch", verifyToken, getPembeliansrch);
+// router.get("/Pembelian/exel", getPembelianExel);
 
 export default router;
