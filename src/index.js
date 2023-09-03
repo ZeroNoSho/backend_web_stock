@@ -22,13 +22,13 @@ const db = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.e
   },
 });
 
-//koneksi
-// try {
-//   await db.authenticate();
-//   console.log("DataBase Connected...");
-// } catch (error) {
-//   console.error(error);
-// }
+// koneksi
+try {
+  await db.authenticate();
+  console.log("DataBase Connected...");
+} catch (error) {
+  console.error(error);
+}
 
 app.use(
   cors({
