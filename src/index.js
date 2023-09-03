@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
+import bcrypt from "bcryptjs";
 import { Op } from "sequelize";
 import { BahanBaku, DataBarang, Jenis, Produksi, Transaksi, Users } from "../models/index.js";
 import { verifyToken } from "../middleware/index.js";
@@ -22,6 +23,31 @@ try {
 }
 
 //user;
+const getUser = async (req, res) => {
+  try {
+    const users = await Users.findAll();
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+  }
+};
+const Register = async (req, res) => {
+  const { name, password, confpass } = req.body;
+  if (password !== confpass) {
+    return res.status(400).json({ msg: "password tidak sama dengan confirm" });
+  }
+  const salt = await bcrypt.genSalt();
+  const hashPassword = await bcrypt.hash(password, salt);
+  try {
+    await Users.create({
+      name,
+      password: hashPassword,
+    });
+    res.json({ msg: "ubah password berhasil" });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 //bahan
 const SetBahanbaku = async (req, res) => {
