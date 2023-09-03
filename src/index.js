@@ -34,7 +34,7 @@ import {
   getProduksibakuSerch,
   setProduksi,
   updateProduksi,
-} from "../controllers/index.js";
+} from "../controller/index.js";
 // import router from "../routes/index.js";
 
 dotenv.config();
