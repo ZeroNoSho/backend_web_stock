@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const db = new Sequelize(process.env.DB, process.env.USER, process.env.PASS, {
   host: process.env.HOST,
-  dialect: "mysql",
+  dialect: process.env.DIALECT,
 });
 
 export default db;
