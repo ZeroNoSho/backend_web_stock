@@ -20,67 +20,84 @@ try {
   console.error(error);
 }
 
-//bahan baku
-const Login = async (req, res) => {
+const setBarang = async (req, res) => {
+  const { nama, jenis, stok } = req.body;
+  const product = await DataBarang.findOne({
+    where: {
+      nama: nama,
+    },
+  });
+  if (product) return res.json({ msg: "sudah ada" });
+
   try {
-    const user = await Users.findOne({
-      where: {
-        name: req.body.name,
-      },
+    await DataBarang.create({
+      nama: nama,
+      jenis: jenis,
+      stok: stok,
+      tipe: "Barang",
     });
+    res.json({ msg: "berhasil menambahkan" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const updateBarang = async (req, res) => {
+  const product = await DataBarang.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
 
-    const match = await bcrypt.compare(req.body.password, user.password);
-    if (!match) return res.status(400).json({ msg: "Wrong Password" });
-    const UserId = user.id;
-    const name = user.name;
-
-    const accessToken = jwt.sign({ UserId, name }, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "20s",
-    });
-    const refreshToken = jwt.sign({ UserId, name }, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: "1d",
-    });
-    await Users.update(
-      { refresh_token: refreshToken },
+  const { nama, jenis, stok } = req.body;
+  try {
+    await DataBarang.update(
+      { nama: nama, jenis: jenis, stok: stok },
       {
         where: {
-          id: UserId,
+          id: req.params.id,
         },
       }
     );
-
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, // Mengubah maxAge menjadi detik
-      secure: true, // set to true if your using https or samesite is none
-      sameSite: "none",
-    });
-
-    res.json({ accessToken });
+    res.status(200).json({ msg: "berhasil di update" });
   } catch (error) {
-    res.status(404).json({ msg: "user saalah" });
+    console.log(error.message);
   }
 };
-const Logout = async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-  if (!refreshToken) return res.sendStatus(204);
-  const user = await Users.findAll({
+const delBarang = async (req, res) => {
+  const product = await DataBarang.findOne({
     where: {
-      refresh_token: refreshToken,
+      id: req.params.id,
     },
   });
-  if (!user[0]) return res.sendStatus(204);
-  const useId = user[0].id;
-  await Users.update(
-    { refresh_token: null },
-    {
+  if (!product) return res.status(404).json({ msg: "No data" });
+  try {
+    await DataBarang.destroy({
       where: {
-        id: useId,
+        id: req.params.id,
       },
-    }
-  );
-  res.clearCookie("refreshToken");
-  return res.sendStatus(200);
+    });
+    res.status(200).json({ msg: "berhasil di hapus" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const getBarangSerch = async (req, res) => {
+  const search = req.query.search_query || "";
+  const result = await DataBarang.findAll({
+    where: {
+      [Op.or]: [
+        {
+          nama: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+      ],
+    },
+  });
+  res.json({
+    result: result,
+  });
 };
 
 app.use(
@@ -97,8 +114,10 @@ app.get("/", function (req, res) {
   res.json({ nama: "Susscess" });
 });
 
-app.post("/login", Login);
-app.delete("/logout", Logout);
+app.post("/Barang", setBarang);
+app.patch("/Barang/:id", updateBarang);
+app.delete("/Barang/:id", delBarang);
+app.get("/Barang/serch", getBarangSerch);
 
 app.use(cookieParser());
 app.use(express.json());
