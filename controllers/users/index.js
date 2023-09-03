@@ -31,15 +31,17 @@ export const Register = async (req, res) => {
 
 export const Login = async (req, res) => {
   try {
-    const user = await Users.findAll({
+    const user = await Users.findOne({
       where: {
         name: req.body.name,
       },
     });
-    const match = await bcrypt.compare(req.body.password, user[0].password);
+
+    const match = await bcrypt.compare(req.body.password, user.password);
     if (!match) return res.status(400).json({ msg: "Wrong Password" });
-    const UserId = user[0].id;
-    const name = user[0].name;
+    const UserId = user.id;
+    const name = user.name;
+  
     const accessToken = jwt.sign({ UserId, name }, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: "20s",
     });

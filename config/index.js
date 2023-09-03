@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 import mysql from "mysql2";
 
 dotenv.config();
-const db = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-  host: process.env.DB_HOST,
-  dialect: process.env.DB_DIALECT,
+const db = new Sequelize(process.env.DB_NAME || "sql12643768", process.env.DB_USERNAME || "sql12643768", process.env.DB_PASSWORD || "yvYE3d1GFT", {
+  host: process.env.DB_HOST || "sql12.freesqldatabase.com",
+  dialect: process.env.DB_DIALECT || "mysql",
   port: process.env.DB_PORT,
   dialectModule: mysql,
   pool: {
