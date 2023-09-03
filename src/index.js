@@ -22,15 +22,7 @@ try {
   console.error(error);
 }
 
-//user
-const getUser = async (req, res) => {
-  try {
-    const users = await Users.findAll();
-    res.json(users);
-  } catch (error) {
-    console.error(error);
-  }
-};
+//user;
 
 //bahan
 const SetBahanbaku = async (req, res) => {
@@ -746,8 +738,6 @@ app.use(
 app.get("/", function (req, res) {
   res.json({ nama: "Susscess" });
 });
-
-app.get("/users", verifyToken, getUser);
 
 app.post("/Barang", verifyToken, setBarang);
 app.patch("/Barang/:id", verifyToken, updateBarang);
