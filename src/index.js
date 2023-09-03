@@ -1,22 +1,20 @@
 import express from "express";
-import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-import mysql from "mysql2";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
-// import router from "./routes/index.js";
+import router from "./routes/index.js";
 
 dotenv.config();
 const app = express();
 
 //koneksi
-// try {
-//   await db.authenticate();
-//   console.log("DataBase Connected...");
-// } catch (error) {
-//   console.error(error);
-// }
+try {
+  await db.authenticate();
+  console.log("DataBase Connected...");
+} catch (error) {
+  console.error(error);
+}
 
 app.use(
   cors({
@@ -35,7 +33,7 @@ app.get("/", function (req, res) {
 
 app.use(cookieParser());
 app.use(express.json());
-// app.use(router);
+app.use(router);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
