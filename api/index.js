@@ -1,10 +1,16 @@
-export default async function handler(request, response) {
-  if (!request.url) return response.status(400);
+import express from "express";
+const app = express();
 
-  const url = new URL(request.url, `http://${request.headers.host}`);
-  const { searchParams } = url;
-  const hasTitle = searchParams.has("title");
-  const title = hasTitle ? searchParams.get("title")?.slice(0, 100) : "My default title";
+app.get("/api", (req, res) => {
+  const path = `/api/item/${v4()}`;
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+});
 
-  return response.status(200).json({ title });
-}
+app.get("/api/item/:slug", (req, res) => {
+  const { slug } = req.params;
+  res.end(`Item: ${slug}`);
+});
+
+module.exports = app;
