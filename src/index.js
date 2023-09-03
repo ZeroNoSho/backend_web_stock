@@ -4,7 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
 import { Op } from "sequelize";
-import { BahanBaku } from "../models/index.js";
+import { BahanBaku, DataBarang, Jenis, Produksi, Transaksi, Users } from "../models/index.js";
 // import router from "../routes/index.js";
 
 dotenv.config();

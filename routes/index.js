@@ -35,36 +35,36 @@ import {
 
 const router = express.Router();
 
-// //login
-// router.get("/users", verifyToken, getUser);
-// router.post("/users", Register);
-// router.post("/login", Login);
-// router.get("/token", refreshToken);
-// router.delete("/logout", Logout);
+//login
+router.get("/users", verifyToken, getUser);
+router.post("/users", Register);
+router.post("/login", Login);
+router.get("/token", refreshToken);
+router.delete("/logout", Logout);
 
 //master jenis
-// router.post("/Jenis", verifyToken, setJenis);
-// router.patch("/Jenis/:id", verifyToken, updateJenis);
-// router.delete("/Jenis/:id", verifyToken, delJenis);
-// router.get("/Jenis/serch", verifyToken, getJenisSerch);
+router.post("/Jenis", verifyToken, setJenis);
+router.patch("/Jenis/:id", verifyToken, updateJenis);
+router.delete("/Jenis/:id", verifyToken, delJenis);
+router.get("/Jenis/serch", verifyToken, getJenisSerch);
 
 //master data barang
-// router.post("/Barang", verifyToken, setBarang);
-// router.patch("/Barang/:id", verifyToken, updateBarang);
-// router.delete("/Barang/:id", verifyToken, delBarang);
-// router.get("/Barang/serch", verifyToken, getBarangSerch);
+router.post("/Barang", verifyToken, setBarang);
+router.patch("/Barang/:id", verifyToken, updateBarang);
+router.delete("/Barang/:id", verifyToken, delBarang);
+router.get("/Barang/serch", verifyToken, getBarangSerch);
 
-// //menu bahan baku
-// router.post("/Bahanbaku", verifyToken, setBahanbaku);
-// router.patch("/Bahanbaku/:id", verifyToken, updateBahanbaku);
-// router.delete("/Bahanbaku/:id", verifyToken, delBahanbaku);
-// router.get("/Bahanbaku/serch", verifyToken, getBahanbakuSerch);
+//menu bahan baku
+router.post("/Bahanbaku", verifyToken, setBahanbaku);
+router.patch("/Bahanbaku/:id", verifyToken, updateBahanbaku);
+router.delete("/Bahanbaku/:id", verifyToken, delBahanbaku);
+router.get("/Bahanbaku/serch", verifyToken, getBahanbakuSerch);
 
 //produksi
-// router.get("/Produksi/serch", verifyToken, getProduksibakuSerch);
-// router.post("/Produksi", verifyToken, setProduksi);
-// router.delete("/Produksi/:id", verifyToken, delProduksi);
-// router.patch("/Produksi/:id", verifyToken, updateProduksi);
+router.get("/Produksi/serch", verifyToken, getProduksibakuSerch);
+router.post("/Produksi", verifyToken, setProduksi);
+router.delete("/Produksi/:id", verifyToken, delProduksi);
+router.patch("/Produksi/:id", verifyToken, updateProduksi);
 
 //transaksi Masuk
 router.post("/Transaksi/Masuk", verifyToken, setTransaksiMasuk);
