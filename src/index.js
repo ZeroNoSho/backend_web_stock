@@ -748,7 +748,6 @@ app.get("/", function (req, res) {
 });
 
 app.get("/users", verifyToken, getUser);
-app.post("/users", Register);
 
 app.post("/Barang", verifyToken, setBarang);
 app.patch("/Barang/:id", verifyToken, updateBarang);
