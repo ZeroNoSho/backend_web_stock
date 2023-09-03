@@ -49,16 +49,16 @@ router.delete("/Jenis/:id", verifyToken, delJenis);
 router.get("/Jenis/serch", verifyToken, getJenisSerch);
 
 //master data barang
-router.post("/Barang", verifyToken, setBarang);
-router.patch("/Barang/:id", verifyToken, updateBarang);
-router.delete("/Barang/:id", verifyToken, delBarang);
-router.get("/Barang/serch", verifyToken, getBarangSerch);
+// router.post("/Barang", verifyToken, setBarang);
+// router.patch("/Barang/:id", verifyToken, updateBarang);
+// router.delete("/Barang/:id", verifyToken, delBarang);
+// router.get("/Barang/serch", verifyToken, getBarangSerch);
 
 //menu bahan baku
-router.post("/Bahanbaku", verifyToken, setBahanbaku);
-router.patch("/Bahanbaku/:id", verifyToken, updateBahanbaku);
-router.delete("/Bahanbaku/:id", verifyToken, delBahanbaku);
-router.get("/Bahanbaku/serch", verifyToken, getBahanbakuSerch);
+// router.post("/Bahanbaku", verifyToken, setBahanbaku);
+// router.patch("/Bahanbaku/:id", verifyToken, updateBahanbaku);
+// router.delete("/Bahanbaku/:id", verifyToken, delBahanbaku);
+// router.get("/Bahanbaku/serch", verifyToken, getBahanbakuSerch);
 
 //produksi
 router.get("/Produksi/serch", verifyToken, getProduksibakuSerch);

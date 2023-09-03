@@ -180,6 +180,85 @@ const getBarangSerch = async (req, res) => {
   });
 };
 
+//jenis
+const setJenis = async (req, res) => {
+  const jenis = req.body.jenis;
+  const product = await Jenis.findOne({
+    where: {
+      jenis: jenis,
+    },
+  });
+
+  if (product) return res.json({ msg: "sudah ada" });
+
+  try {
+    await Jenis.create({
+      jenis: jenis,
+    });
+    res.json({ msg: "berhasil menambahkan" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const updateJenis = async (req, res) => {
+  const product = await Jenis.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+
+  const jenis = req.body.jenis;
+  try {
+    await Jenis.update(
+      { jenis: jenis },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "berhasil di update" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const delJenis = async (req, res) => {
+  const product = await Jenis.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (!product) return res.status(404).json({ msg: "No data" });
+  try {
+    await Jenis.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ msg: "berhasil di hapus" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const getJenisSerch = async (req, res) => {
+  const search = req.query.search_query || "";
+  const result = await Jenis.findAll({
+    where: {
+      [Op.or]: [
+        {
+          jenis: {
+            [Op.like]: "%" + search + "%",
+          },
+        },
+      ],
+    },
+  });
+  res.json({
+    result: result,
+  });
+};
+
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -203,6 +282,11 @@ app.post("/Bahanbaku", SetBahanbaku);
 app.patch("/Bahanbaku/:id", UpdateBahanbaku);
 app.delete("/Bahanbaku/:id", DelBahanbaku);
 app.get("/Bahanbaku/serch", GetBahanbakuSerch);
+
+app.post("/Jenis", setJenis);
+app.patch("/Jenis/:id", updateJenis);
+app.delete("/Jenis/:id", delJenis);
+app.get("/Jenis/serch", getJenisSerch);
 
 app.use(cookieParser());
 app.use(express.json());
