@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
-import { Sequelize } from "sequelize";
+import { BahanBaku } from "../models/index.js";
 // import router from "../routes/index.js";
 
 dotenv.config();
@@ -16,26 +16,6 @@ try {
 } catch (error) {
   console.error(error);
 }
-
-const { DataTypes } = Sequelize;
-const BahanBaku = db.define(
-  "bahanbaku",
-  {
-    nama: {
-      type: DataTypes.STRING,
-    },
-    jenis: {
-      type: DataTypes.STRING,
-    },
-    stok: {
-      type: DataTypes.INTEGER,
-    },
-    tipe: {
-      type: DataTypes.INTEGER,
-    },
-  },
-  { freezeTableName: true }
-);
 
 const getBahanbaku = async (req, res) => {
   try {
