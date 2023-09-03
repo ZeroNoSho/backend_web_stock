@@ -3,7 +3,38 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
-import { BahanBaku } from "../models/index.js";
+import {
+  Login,
+  Logout,
+  Register,
+  getUser,
+  delTransaksi,
+  getTransaksiExel,
+  getTransaksiSerch,
+  setTransaksiKeluar,
+  setTransaksiMasuk,
+  updateTransaksi,
+  refreshToken,
+  delJenis,
+  getJenisSerch,
+  setJenis,
+  updateJenis,
+  delBarang,
+  getBarangSerch,
+  setBarang,
+  updateBarang,
+  delBahanbaku,
+  getBahanbakuSerch,
+  setBahanbaku,
+  updateBahanbaku,
+  getPembelian,
+  getPembelianExel,
+  getPembeliansrch,
+  delProduksi,
+  getProduksibakuSerch,
+  setProduksi,
+  updateProduksi,
+} from "../controllers/index.js";
 // import router from "../routes/index.js";
 
 dotenv.config();
@@ -16,15 +47,6 @@ try {
 } catch (error) {
   console.error(error);
 }
-
-const getBahanbaku = async (req, res) => {
-  try {
-    const Databarang = await BahanBaku.findAll();
-    res.json(Databarang);
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 app.use(
   cors({
