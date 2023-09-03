@@ -22,6 +22,19 @@ try {
 } catch (error) {
   console.error(error);
 }
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
+    credentials: true,
+    exposedHeaders: ["*", "Authorization"],
+    maxAge: 600,
+  })
+);
+
+app.use(cookieParser());
+app.use(express.json());
 
 //user;
 const getUser = async (req, res) => {
@@ -835,16 +848,6 @@ const getPembelianExel = async (req, res) => {
   return res.send(buffer);
 };
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
-    credentials: true,
-    exposedHeaders: ["*", "Authorization"],
-    maxAge: 600,
-  })
-);
 app.get("/", function (req, res) {
   res.json({ nama: "Susscess" });
 });
@@ -885,9 +888,6 @@ app.get("/Transaksi/exel", getTransaksiExel);
 app.get("/Pembelian", verifyToken, getPembelian);
 app.get("/Pembelian/serch", verifyToken, getPembeliansrch);
 app.get("/Pembelian/exel", getPembelianExel);
-
-app.use(cookieParser());
-app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
