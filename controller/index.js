@@ -1,11 +1,11 @@
-import { Login, Logout, Register, getUser } from "./users/index.js";
-import { refreshToken } from "./refrshtoken/index.js";
-import { delJenis, getJenisSerch, setJenis, updateJenis } from "./jenis/index.js";
-import { delBarang, getBarangSerch, setBarang, updateBarang } from "./databarang/index.js";
-import { delBahanbaku, getBahanbakuSerch, setBahanbaku, updateBahanbaku } from "./bahanbaku/index.js";
-import { delTransaksi, getTransaksiExel, getTransaksiSerch, setTransaksiKeluar, setTransaksiMasuk, updateTransaksi } from "./transaksi/index.js";
-import { getPembelian, getPembelianExel, getPembeliansrch } from "./rpembelian/index.js";
-import { delProduksi, getProduksibakuSerch, setProduksi, updateProduksi } from "./produksi/index.js";
+import { Login, Logout, Register, getUser } from "./Users/index.js";
+import { refreshToken } from "./Refrshtoken/index.js";
+import { delJenis, getJenisSerch, setJenis, updateJenis } from "./Jenis/index.js";
+import { delBarang, getBarangSerch, setBarang, updateBarang } from "./Databarang/index.js";
+import { delBahanbaku, getBahanbakuSerch, setBahanbaku, updateBahanbaku } from "./Bahanbaku/index.js";
+import { delTransaksi, getTransaksiExel, getTransaksiSerch, setTransaksiKeluar, setTransaksiMasuk, updateTransaksi } from "./Transaksi/index.js";
+import { getPembelian, getPembelianExel, getPembeliansrch } from "./Rpembelian/index.js";
+import { delProduksi, getProduksibakuSerch, setProduksi, updateProduksi } from "./Produksi/index.js";
 
 export {
   Login,
