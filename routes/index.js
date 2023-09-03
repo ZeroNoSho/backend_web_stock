@@ -61,10 +61,10 @@ router.delete("/logout", Logout);
 // router.get("/Bahanbaku/serch", verifyToken, getBahanbakuSerch);
 
 //produksi
-router.get("/Produksi/serch", verifyToken, getProduksibakuSerch);
-router.post("/Produksi", verifyToken, setProduksi);
-router.delete("/Produksi/:id", verifyToken, delProduksi);
-router.patch("/Produksi/:id", verifyToken, updateProduksi);
+// router.get("/Produksi/serch", verifyToken, getProduksibakuSerch);
+// router.post("/Produksi", verifyToken, setProduksi);
+// router.delete("/Produksi/:id", verifyToken, delProduksi);
+// router.patch("/Produksi/:id", verifyToken, updateProduksi);
 
 //transaksi Masuk
 router.post("/Transaksi/Masuk", verifyToken, setTransaksiMasuk);
