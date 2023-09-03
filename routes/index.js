@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyToken } from "../middleware/index.js";
-import { Login } from "../controllers/users/index.js";
+import { Login } from "../users/index.js";
 // import {
 //   Login,
 //   Logout,
