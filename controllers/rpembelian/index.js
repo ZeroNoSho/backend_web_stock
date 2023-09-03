@@ -1,5 +1,4 @@
-import DataBarang from "../../models/Databarang/index.js";
-import BahanBaku from "../../models/Bahanbaku/index.js";
+import { DataBarang, BahanBaku } from "../../models/index.js";
 import * as XLSX from "xlsx/xlsx.mjs";
 import * as fs from "fs";
 XLSX.set_fs(fs);

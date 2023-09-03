@@ -1,4 +1,4 @@
-import Produksi from "../../models/Produksi/index.js";
+import { Produksi } from "../../models/index.js";
 import { Op } from "sequelize";
 
 export const getProduksibakuSerch = async (req, res) => {

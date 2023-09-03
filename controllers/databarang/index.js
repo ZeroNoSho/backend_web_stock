@@ -1,4 +1,4 @@
-import DataBarang from "../../models/Databarang/index.js";
+import { DataBarang } from "../../models/index.js";
 import { Op } from "sequelize";
 
 export const getBarang = async (req, res) => {

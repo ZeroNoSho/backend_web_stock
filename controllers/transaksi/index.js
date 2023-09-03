@@ -1,6 +1,4 @@
-import Transaksi from "../../models/Transaksi/index.js";
-import DataBarang from "../../models/Databarang/index.js";
-import BahanBaku from "../../models/Bahanbaku/index.js";
+import { Transaksi, DataBarang, BahanBaku } from "../../models/index.js";
 import { Op } from "sequelize";
 import * as XLSX from "xlsx/xlsx.mjs";
 import * as fs from "fs";
