@@ -9,7 +9,6 @@ import { verifyToken } from "../middleware/index.js";
 import * as XLSX from "xlsx/xlsx.mjs";
 import * as fs from "fs";
 XLSX.set_fs(fs);
-// import router from "../routes/index.js";
 
 dotenv.config();
 const app = express();
@@ -772,7 +771,6 @@ app.get("/Pembelian/exel", getPembelianExel);
 
 app.use(cookieParser());
 app.use(express.json());
-// app.use(router);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
