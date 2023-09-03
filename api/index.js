@@ -13,5 +13,4 @@ app.get("/api/item/:slug", (req, res) => {
   res.end(`Item: ${slug}`);
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+export default app;
