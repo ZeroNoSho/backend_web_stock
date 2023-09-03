@@ -737,35 +737,35 @@ app.get("/", function (req, res) {
   res.json({ nama: "Susscess" });
 });
 
-app.post("/Barang", setBarang);
-app.patch("/Barang/:id", updateBarang);
-app.delete("/Barang/:id", delBarang);
-app.get("/Barang/serch", getBarangSerch);
+app.post("/Barang", verifyToken, setBarang);
+app.patch("/Barang/:id", verifyToken, updateBarang);
+app.delete("/Barang/:id", verifyToken, delBarang);
+app.get("/Barang/serch", verifyToken, getBarangSerch);
 
-app.post("/Bahanbaku", SetBahanbaku);
-app.patch("/Bahanbaku/:id", UpdateBahanbaku);
-app.delete("/Bahanbaku/:id", DelBahanbaku);
-app.get("/Bahanbaku/serch", GetBahanbakuSerch);
+app.post("/Bahanbaku", verifyToken, SetBahanbaku);
+app.patch("/Bahanbaku/:id", verifyToken, UpdateBahanbaku);
+app.delete("/Bahanbaku/:id", verifyToken, DelBahanbaku);
+app.get("/Bahanbaku/serch", verifyToken, GetBahanbakuSerch);
 
-app.post("/Jenis", setJenis);
-app.patch("/Jenis/:id", updateJenis);
-app.delete("/Jenis/:id", delJenis);
-app.get("/Jenis/serch", getJenisSerch);
+app.post("/Jenis", verifyToken, setJenis);
+app.patch("/Jenis/:id", verifyToken, updateJenis);
+app.delete("/Jenis/:id", verifyToken, delJenis);
+app.get("/Jenis/serch", verifyToken, getJenisSerch);
 
-app.get("/Produksi/serch", getProduksibakuSerch);
-app.post("/Produksi", setProduksi);
-app.delete("/Produksi/:id", delProduksi);
-app.patch("/Produksi/:id", updateProduksi);
+app.get("/Produksi/serch", verifyToken, getProduksibakuSerch);
+app.post("/Produksi", verifyToken, setProduksi);
+app.delete("/Produksi/:id", verifyToken, delProduksi);
+app.patch("/Produksi/:id", verifyToken, updateProduksi);
 
-app.post("/Transaksi/Masuk", setTransaksiMasuk);
-app.post("/Transaksi/Keluar", setTransaksiKeluar);
-app.patch("/Transaksi/:id", updateTransaksi);
-app.delete("/Transaksi/:id", delTransaksi);
-app.get("/Transaksi/serch", getTransaksiSerch);
+app.post("/Transaksi/Masuk", verifyToken, setTransaksiMasuk);
+app.post("/Transaksi/Keluar", verifyToken, setTransaksiKeluar);
+app.patch("/Transaksi/:id", verifyToken, updateTransaksi);
+app.delete("/Transaksi/:id", verifyToken, delTransaksi);
+app.get("/Transaksi/serch", verifyToken, getTransaksiSerch);
 app.get("/Transaksi/exel", getTransaksiExel);
 
-app.get("/Pembelian", getPembelian);
-app.get("/Pembelian/serch", getPembeliansrch);
+app.get("/Pembelian", verifyToken, getPembelian);
+app.get("/Pembelian/serch", verifyToken, getPembeliansrch);
 app.get("/Pembelian/exel", getPembelianExel);
 
 app.use(cookieParser());
