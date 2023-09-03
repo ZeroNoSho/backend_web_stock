@@ -1,16 +1,39 @@
 import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import db from "./config/database.js";
+// import router from "./routes/index.js";
+
+dotenv.config();
 const app = express();
 
-app.get("/api", (req, res) => {
-  const path = `/api/item/${v4()}`;
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+//koneksi
+try {
+  await db.authenticate();
+  console.log("DataBase Connected...");
+} catch (error) {
+  console.error(error);
+}
+
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
+    credentials: true,
+    exposedHeaders: ["*", "Authorization"],
+    maxAge: 600,
+  })
+);
+
+app.get("/", function (req, res) {
+  res.json({ nama: "Susscess" });
 });
 
-app.get("/api/item/:slug", (req, res) => {
-  const { slug } = req.params;
-  res.end(`Item: ${slug}`);
-});
+app.use(cookieParser());
+app.use(express.json());
+// app.use(router);
 
-export default app;
+const PORT = process.env.PORT || 5000;
+app.listen(PORT);
