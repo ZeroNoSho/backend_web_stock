@@ -4,7 +4,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { Op } from "sequelize";
 import { BahanBaku, DataBarang, Jenis, Produksi, Transaksi, Users } from "../models/index.js";
 import { verifyToken } from "../middleware/index.js";
