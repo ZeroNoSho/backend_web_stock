@@ -9,16 +9,16 @@ dotenv.config();
 const app = express();
 
 //koneksi
-try {
-  await db.authenticate();
-  console.log("DataBase Connected...");
-} catch (error) {
-  console.error(error);
-}
+// try {
+//   await db.authenticate();
+//   console.log("DataBase Connected...");
+// } catch (error) {
+//   console.error(error);
+// }
 
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
     methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
     credentials: true,
