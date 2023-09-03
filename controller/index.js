@@ -1,3 +1,3 @@
-import { delBahanbaku, getBahanbakuSerch, setBahanbaku, updateBahanbaku } from "./Bahanbaku/index.js";
+import { GetBahanbakuSerch, SetBahanbaku, UpdateBahanbaku, DelBahanbaku } from "./Bahanbaku/index.js";
 
-export { delBahanbaku, getBahanbakuSerch, setBahanbaku, updateBahanbaku };
+export { GetBahanbakuSerch, SetBahanbaku, UpdateBahanbaku, DelBahanbaku };

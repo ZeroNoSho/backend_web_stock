@@ -1,7 +1,7 @@
 import { BahanBaku } from "../../models/index.js";
 import { Op } from "sequelize";
 
-export const getBahanbaku = async (req, res) => {
+export const GetBahanbaku = async (req, res) => {
   try {
     const Databarang = await BahanBaku.findAll();
     res.json(Databarang);
@@ -10,7 +10,7 @@ export const getBahanbaku = async (req, res) => {
   }
 };
 
-export const setBahanbaku = async (req, res) => {
+export const SetBahanbaku = async (req, res) => {
   const { nama, jenis, stok } = req.body;
   const product = await BahanBaku.findOne({
     where: {
@@ -32,7 +32,7 @@ export const setBahanbaku = async (req, res) => {
   }
 };
 
-export const updateBahanbaku = async (req, res) => {
+export const UpdateBahanbaku = async (req, res) => {
   const product = await BahanBaku.findOne({
     where: {
       id: req.params.id,
@@ -56,7 +56,7 @@ export const updateBahanbaku = async (req, res) => {
   }
 };
 
-export const delBahanbaku = async (req, res) => {
+export const DelBahanbaku = async (req, res) => {
   const product = await BahanBaku.findOne({
     where: {
       id: req.params.id,
@@ -75,7 +75,7 @@ export const delBahanbaku = async (req, res) => {
   }
 };
 
-export const getBahanbakuSerch = async (req, res) => {
+export const GetBahanbakuSerch = async (req, res) => {
   const search = req.query.search_query || "";
   const result = await BahanBaku.findAll({
     where: {
