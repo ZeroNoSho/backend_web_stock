@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "../config/index.js";
-import router from "./routes/index.js";
+// import router from "./routes/index.js";
 
 dotenv.config();
 const app = express();
@@ -33,7 +33,7 @@ app.get("/", function (req, res) {
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(router);
+// app.use(router);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
