@@ -1,31 +1,25 @@
 import { Sequelize } from "sequelize";
-import db from "../config/index.js";
+import db from "../../config/index.js";
 
 const { DataTypes } = Sequelize;
 
-const Transaksi = db.define(
-  "transaksi",
+const DataBarang = db.define(
+  "databarang",
   {
     nama: {
-      type: DataTypes.STRING,
-    },
-    tipe: {
       type: DataTypes.STRING,
     },
     jenis: {
       type: DataTypes.STRING,
     },
-    alur: {
-      type: DataTypes.STRING,
-    },
     stok: {
       type: DataTypes.INTEGER,
     },
-    ket: {
-      type: DataTypes.STRING,
+    tipe: {
+      type: DataTypes.INTEGER,
     },
   },
   { freezeTableName: true }
 );
 
-export default Transaksi;
+export default DataBarang;

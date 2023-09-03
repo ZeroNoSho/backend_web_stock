@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize";
-import db from "../config/index.js";
+import db from "../../config/index.js";
 
 const { DataTypes } = Sequelize;
 
-const DataBarang = db.define(
-  "databarang",
+const BahanBaku = db.define(
+  "bahanbaku",
   {
     nama: {
       type: DataTypes.STRING,
@@ -22,4 +22,4 @@ const DataBarang = db.define(
   { freezeTableName: true }
 );
 
-export default DataBarang;
+export default BahanBaku;

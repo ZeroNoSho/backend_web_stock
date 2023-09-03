@@ -1,4 +1,4 @@
-import Jenis from "../models/Jenismodel.js";
+import Jenis from "../../models/Jenismodel/index.js";
 import { Op } from "sequelize";
 
 export const getJenis = async (req, res) => {
@@ -14,7 +14,6 @@ export const setJenis = async (req, res) => {
   const jenis = req.body.jenis;
   const product = await Jenis.findOne({
     where: {
-      
       jenis: jenis,
     },
   });

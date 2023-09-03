@@ -1,4 +1,4 @@
-import BahanBaku from "../models/Bahanbaku.js";
+import BahanBaku from "../../models/Bahanbaku/index.js";
 import { Op } from "sequelize";
 
 export const getBahanbaku = async (req, res) => {
