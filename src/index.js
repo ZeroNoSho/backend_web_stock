@@ -24,7 +24,7 @@ try {
 }
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3000" || "https://frontendwebstock.vercel.app",
     methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
     credentials: true,
