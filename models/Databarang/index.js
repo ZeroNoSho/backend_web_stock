@@ -12,6 +12,9 @@ const DataBarang = db.define(
     jenis: {
       type: DataTypes.STRING,
     },
+    bahan: {
+      type: DataTypes.STRING,
+    },
     stok: {
       type: DataTypes.INTEGER,
     },

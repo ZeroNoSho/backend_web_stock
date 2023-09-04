@@ -147,9 +147,9 @@ const refreshToken = async (req, res) => {
   }
 };
 
-//bahan
+//bahan baku
 const SetBahanbaku = async (req, res) => {
-  const { nama, jenis, stok } = req.body;
+  const { nama, jenis, stok, harga } = req.body;
   const product = await BahanBaku.findOne({
     where: {
       nama: nama,
@@ -163,6 +163,7 @@ const SetBahanbaku = async (req, res) => {
       jenis: jenis,
       stok: stok,
       tipe: "Bahan",
+      harga: harga,
     });
     res.json({ msg: "berhasil menambahkan" });
   } catch (error) {
@@ -177,10 +178,10 @@ const UpdateBahanbaku = async (req, res) => {
   });
   if (!product) return res.status(404).json({ msg: "No data" });
 
-  const { nama, jenis, stok } = req.body;
+  const { nama, jenis, stok, harga } = req.body;
   try {
     await BahanBaku.update(
-      { nama: nama, jenis: jenis, stok: stok },
+      { nama: nama, jenis: jenis, stok: stok, harga: harga },
       {
         where: {
           id: req.params.id,
@@ -230,7 +231,7 @@ const GetBahanbakuSerch = async (req, res) => {
 
 //barang
 const setBarang = async (req, res) => {
-  const { nama, jenis, stok } = req.body;
+  const { nama, jenis, stok, bahan } = req.body;
   const product = await DataBarang.findOne({
     where: {
       nama: nama,
@@ -244,6 +245,7 @@ const setBarang = async (req, res) => {
       jenis: jenis,
       stok: stok,
       tipe: "Barang",
+      bahan: bahan,
     });
     res.json({ msg: "berhasil menambahkan" });
   } catch (error) {
@@ -258,10 +260,10 @@ const updateBarang = async (req, res) => {
   });
   if (!product) return res.status(404).json({ msg: "No data" });
 
-  const { nama, jenis, stok } = req.body;
+  const { nama, jenis, stok, bahan } = req.body;
   try {
     await DataBarang.update(
-      { nama: nama, jenis: jenis, stok: stok },
+      { nama: nama, jenis: jenis, stok: stok, bahan: bahan },
       {
         where: {
           id: req.params.id,

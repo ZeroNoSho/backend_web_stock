@@ -18,6 +18,9 @@ const BahanBaku = db.define(
     tipe: {
       type: DataTypes.INTEGER,
     },
+    harga: {
+      type: DataTypes.INTEGER,
+    },
   },
   { freezeTableName: true }
 );
