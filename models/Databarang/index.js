@@ -19,7 +19,7 @@ const DataBarang = db.define(
       type: DataTypes.INTEGER,
     },
     tipe: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
   },
   { freezeTableName: true }

@@ -6,7 +6,14 @@ import db from "../config/index.js";
 import bcrypt from "bcryptjs";
 import { Op } from "sequelize";
 import jwt from "jsonwebtoken";
-import { BahanBaku, DataBarang, Jenis, Produksi, Transaksi, Users } from "../models/index.js";
+import {
+  BahanBaku,
+  DataBarang,
+  Jenis,
+  Produksi,
+  Transaksi,
+  Users,
+} from "../models/index.js";
 import { verifyToken } from "../middleware/index.js";
 import * as XLSX from "xlsx/xlsx.mjs";
 import * as fs from "fs";
@@ -14,6 +21,12 @@ XLSX.set_fs(fs);
 
 dotenv.config();
 const app = express();
+// BahanBaku.sync()
+// DataBarang.sync()
+// Jenis.sync()
+// Produksi.sync()
+// Transaksi.sync()
+// Users.sync()
 
 //koneksi
 try {
@@ -23,13 +36,17 @@ try {
   console.error(error);
 }
 
-const allowedOrigins = ["http://localhost:3000", "https://frontendwebstock.vercel.app"];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://frontendwebstock.vercel.app",
+];
 app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) === -1) {
-        const msg = "The CORS policy for this site does not allow access from the specified Origin.";
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
         return callback(new Error(msg), false);
       }
       return callback(null, true);
@@ -84,12 +101,20 @@ const Login = async (req, res) => {
     const UserId = user.id;
     const name = user.name;
 
-    const accessToken = jwt.sign({ UserId, name }, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "20s",
-    });
-    const refreshToken = jwt.sign({ UserId, name }, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: "1d",
-    });
+    const accessToken = jwt.sign(
+      { UserId, name },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: "20s",
+      }
+    );
+    const refreshToken = jwt.sign(
+      { UserId, name },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: "1d",
+      }
+    );
     await Users.update(
       { refresh_token: refreshToken },
       {
@@ -142,15 +167,23 @@ const refreshToken = async (req, res) => {
       },
     });
     if (!user[0]) return res.sendStatus(403);
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decode) => {
-      if (err) return res.sendStatus(403);
-      const userId = user[0].id;
-      const name = user[0].name;
-      const accessToken = jwt.sign({ userId, name }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "15s",
-      });
-      res.json({ accessToken });
-    });
+    jwt.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET,
+      (err, decode) => {
+        if (err) return res.sendStatus(403);
+        const userId = user[0].id;
+        const name = user[0].name;
+        const accessToken = jwt.sign(
+          { userId, name },
+          process.env.ACCESS_TOKEN_SECRET,
+          {
+            expiresIn: "15s",
+          }
+        );
+        res.json({ accessToken });
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -158,7 +191,8 @@ const refreshToken = async (req, res) => {
 
 //bahan baku
 const SetBahanbaku = async (req, res) => {
-  const { nama, jenis, stok, harga } = req.body;
+  const { nama, jenis, stok, harga, biayapesan, biayapenyimpanan, ukuran } =
+    req.body;
   const product = await BahanBaku.findOne({
     where: {
       nama: nama,
@@ -173,6 +207,10 @@ const SetBahanbaku = async (req, res) => {
       stok: stok,
       tipe: "Bahan",
       harga: harga,
+      biayapesan: biayapesan,
+      biayapenyimpanan: biayapenyimpanan,
+      ukuran: ukuran,
+      kebutuhan: 0,
     });
     res.json({ msg: "berhasil menambahkan" });
   } catch (error) {
@@ -187,10 +225,19 @@ const UpdateBahanbaku = async (req, res) => {
   });
   if (!product) return res.status(404).json({ msg: "No data" });
 
-  const { nama, jenis, stok, harga } = req.body;
+  const { nama, jenis, stok, harga, biayapesan, biayapenyimpanan, ukuran } =
+    req.body;
   try {
     await BahanBaku.update(
-      { nama: nama, jenis: jenis, stok: stok, harga: harga },
+      {
+        nama: nama,
+        jenis: jenis,
+        stok: stok,
+        harga: harga,
+        biayapesan: biayapesan,
+        biayapenyimpanan: biayapenyimpanan,
+        ukuran: ukuran,
+      },
       {
         where: {
           id: req.params.id,
@@ -632,7 +679,14 @@ const updateTransaksi = async (req, res) => {
     }
 
     await Transaksi.update(
-      { nama: nama, tipe: tipe, jenis: jenis, alur: alur, stok: stok, ket: ket },
+      {
+        nama: nama,
+        tipe: tipe,
+        jenis: jenis,
+        alur: alur,
+        stok: stok,
+        ket: ket,
+      },
       {
         where: {
           id: req.params.id,
@@ -793,8 +847,19 @@ const getTransaksiSerch = async (req, res) => {
 };
 const getTransaksiExel = async (req, res) => {
   const transaksi = await Transaksi.findAll();
-  const heading = [["nama", "tipe", "jenis", "alur", "stok", "ket", "createdAt", "updatedAt"]];
-  const multiDimensionalArray = transaksi.map((obj) => [obj.nama, obj.tipe, obj.jenis, obj.alur, obj.stok, obj.ket, obj.createdAt.toString(), obj.updatedAt.toString()]);
+  const heading = [
+    ["nama", "tipe", "jenis", "alur", "stok", "ket", "createdAt", "updatedAt"],
+  ];
+  const multiDimensionalArray = transaksi.map((obj) => [
+    obj.nama,
+    obj.tipe,
+    obj.jenis,
+    obj.alur,
+    obj.stok,
+    obj.ket,
+    obj.createdAt.toString(),
+    obj.updatedAt.toString(),
+  ]);
 
   const workbook = XLSX.utils.book_new();
   const worksheet = XLSX.utils.aoa_to_sheet(multiDimensionalArray);
@@ -844,9 +909,25 @@ const getPembelianExel = async (req, res) => {
   const Bahan = await BahanBaku.findAll();
 
   const arrayall = [...Bahan, ...Barang];
-  const heading = [["Nama Barang / Bahan", " satuan", "stok", "tipe", "createdAt", "updatedAt"]];
+  const heading = [
+    [
+      "Nama Barang / Bahan",
+      " satuan",
+      "stok",
+      "tipe",
+      "createdAt",
+      "updatedAt",
+    ],
+  ];
 
-  const multiDimensionalArray = arrayall.map((obj) => [obj.nama, obj.jenis, obj.stok, obj.tipe, obj.createdAt.toString(), obj.updatedAt.toString()]);
+  const multiDimensionalArray = arrayall.map((obj) => [
+    obj.nama,
+    obj.jenis,
+    obj.stok,
+    obj.tipe,
+    obj.createdAt.toString(),
+    obj.updatedAt.toString(),
+  ]);
 
   const workbook = XLSX.utils.book_new();
   const worksheet = XLSX.utils.aoa_to_sheet(multiDimensionalArray);

@@ -16,9 +16,21 @@ const BahanBaku = db.define(
       type: DataTypes.INTEGER,
     },
     tipe: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     harga: {
+      type: DataTypes.INTEGER,
+    },
+    biayapesan: {
+      type: DataTypes.INTEGER,
+    },
+    biayapenyimpanan: {
+      type: DataTypes.INTEGER,
+    },
+    ukuran: {
+      type: DataTypes.INTEGER,
+    },
+    kebutuhan: {
       type: DataTypes.INTEGER,
     },
   },

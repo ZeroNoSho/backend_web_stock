@@ -28,7 +28,7 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.5",
     "mysql2": "^3.6.0",
-    "sequelize": "^6.32.1",
+    "sequelize": "^6.33.0",
     "sequelize-cli": "^6.6.1",
     "serverless-sequelize-migrations": "^1.1.2",
     "xlsx": "^0.18.5"
