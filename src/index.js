@@ -21,12 +21,6 @@ XLSX.set_fs(fs);
 
 dotenv.config();
 const app = express();
-// BahanBaku.sync()
-// DataBarang.sync()
-// Jenis.sync()
-// Produksi.sync()
-// Transaksi.sync()
-// Users.sync()
 
 //koneksi
 try {
