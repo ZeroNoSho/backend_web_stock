@@ -7,13 +7,6 @@ const db = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.e
   host: process.env.DB_HOST,
   dialect: process.env.DB_DIALECT,
   port: process.env.DB_PORT,
-  dialectModule: mysql,
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 1000,
-    handleDisconnects: true,
-  },
 });
 
 export default db;
