@@ -184,100 +184,100 @@ const refreshToken = async (req, res) => {
 };
 
 //bahan baku
-const SetBahanbaku = async (req, res) => {
-  const { nama, jenis, stok, harga, biayapesan, biayapenyimpanan, ukuran } =
-    req.body;
-  const product = await BahanBaku.findOne({
-    where: {
-      nama: nama,
-    },
-  });
-  if (product) return res.json({ msg: "sudah ada" });
+// const SetBahanbaku = async (req, res) => {
+//   const { nama, jenis, stok, harga, biayapesan, biayapenyimpanan, ukuran } =
+//     req.body;
+//   const product = await BahanBaku.findOne({
+//     where: {
+//       nama: nama,
+//     },
+//   });
+//   if (product) return res.json({ msg: "sudah ada" });
 
-  try {
-    await BahanBaku.create({
-      nama: nama,
-      jenis: jenis,
-      stok: stok,
-      tipe: "Bahan",
-      harga: harga,
-      biayapesan: biayapesan,
-      biayapenyimpanan: biayapenyimpanan,
-      ukuran: ukuran,
-      kebutuhan: 0,
-    });
-    res.json({ msg: "berhasil menambahkan" });
-  } catch (error) {
-    console.log(error);
-  }
-};
-const UpdateBahanbaku = async (req, res) => {
-  const product = await BahanBaku.findOne({
-    where: {
-      id: req.params.id,
-    },
-  });
-  if (!product) return res.status(404).json({ msg: "No data" });
+//   try {
+//     await BahanBaku.create({
+//       nama: nama,
+//       jenis: jenis,
+//       stok: stok,
+//       tipe: "Bahan",
+//       harga: harga,
+//       biayapesan: biayapesan,
+//       biayapenyimpanan: biayapenyimpanan,
+//       ukuran: ukuran,
+//       kebutuhan: 0,
+//     });
+//     res.json({ msg: "berhasil menambahkan" });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+// const UpdateBahanbaku = async (req, res) => {
+//   const product = await BahanBaku.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   });
+//   if (!product) return res.status(404).json({ msg: "No data" });
 
-  const { nama, jenis, stok, harga, biayapesan, biayapenyimpanan, ukuran } =
-    req.body;
-  try {
-    await BahanBaku.update(
-      {
-        nama: nama,
-        jenis: jenis,
-        stok: stok,
-        harga: harga,
-        biayapesan: biayapesan,
-        biayapenyimpanan: biayapenyimpanan,
-        ukuran: ukuran,
-      },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
-    res.status(200).json({ msg: "berhasil di update" });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-const DelBahanbaku = async (req, res) => {
-  const product = await BahanBaku.findOne({
-    where: {
-      id: req.params.id,
-    },
-  });
-  if (!product) return res.status(404).json({ msg: "No data" });
-  try {
-    await BahanBaku.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).json({ msg: "berhasil di hapus" });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-const GetBahanbakuSerch = async (req, res) => {
-  const search = req.query.search_query || "";
-  const result = await BahanBaku.findAll({
-    where: {
-      [Op.or]: [
-        {
-          nama: {
-            [Op.like]: "%" + search + "%",
-          },
-        },
-      ],
-    },
-  });
-  res.json({
-    result: result,
-  });
-};
+//   const { nama, jenis, stok, harga, biayapesan, biayapenyimpanan, ukuran } =
+//     req.body;
+//   try {
+//     await BahanBaku.update(
+//       {
+//         nama: nama,
+//         jenis: jenis,
+//         stok: stok,
+//         harga: harga,
+//         biayapesan: biayapesan,
+//         biayapenyimpanan: biayapenyimpanan,
+//         ukuran: ukuran,
+//       },
+//       {
+//         where: {
+//           id: req.params.id,
+//         },
+//       }
+//     );
+//     res.status(200).json({ msg: "berhasil di update" });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+// const DelBahanbaku = async (req, res) => {
+//   const product = await BahanBaku.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   });
+//   if (!product) return res.status(404).json({ msg: "No data" });
+//   try {
+//     await BahanBaku.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     res.status(200).json({ msg: "berhasil di hapus" });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+// const GetBahanbakuSerch = async (req, res) => {
+//   const search = req.query.search_query || "";
+//   const result = await BahanBaku.findAll({
+//     where: {
+//       [Op.or]: [
+//         {
+//           nama: {
+//             [Op.like]: "%" + search + "%",
+//           },
+//         },
+//       ],
+//     },
+//   });
+//   res.json({
+//     result: result,
+//   });
+// };
 
 //barang
 const setBarang = async (req, res) => {
