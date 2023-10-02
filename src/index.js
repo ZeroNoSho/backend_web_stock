@@ -280,86 +280,86 @@ const refreshToken = async (req, res) => {
 // };
 
 //barang
-const setBarang = async (req, res) => {
-  const { nama, jenis, stok, bahan } = req.body;
-  const product = await DataBarang.findOne({
-    where: {
-      nama: nama,
-    },
-  });
-  if (product) return res.json({ msg: "sudah ada" });
+// const setBarang = async (req, res) => {
+//   const { nama, jenis, stok, bahan } = req.body;
+//   const product = await DataBarang.findOne({
+//     where: {
+//       nama: nama,
+//     },
+//   });
+//   if (product) return res.json({ msg: "sudah ada" });
 
-  try {
-    await DataBarang.create({
-      nama: nama,
-      jenis: jenis,
-      stok: stok,
-      tipe: "Barang",
-      bahan: bahan,
-    });
-    res.json({ msg: "berhasil menambahkan" });
-  } catch (error) {
-    console.log(error);
-  }
-};
-const updateBarang = async (req, res) => {
-  const product = await DataBarang.findOne({
-    where: {
-      id: req.params.id,
-    },
-  });
-  if (!product) return res.status(404).json({ msg: "No data" });
+//   try {
+//     await DataBarang.create({
+//       nama: nama,
+//       jenis: jenis,
+//       stok: stok,
+//       tipe: "Barang",
+//       bahan: bahan,
+//     });
+//     res.json({ msg: "berhasil menambahkan" });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+// const updateBarang = async (req, res) => {
+//   const product = await DataBarang.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   });
+//   if (!product) return res.status(404).json({ msg: "No data" });
 
-  const { nama, jenis, stok, bahan } = req.body;
-  try {
-    await DataBarang.update(
-      { nama: nama, jenis: jenis, stok: stok, bahan: bahan },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
-    res.status(200).json({ msg: "berhasil di update" });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-const delBarang = async (req, res) => {
-  const product = await DataBarang.findOne({
-    where: {
-      id: req.params.id,
-    },
-  });
-  if (!product) return res.status(404).json({ msg: "No data" });
-  try {
-    await DataBarang.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).json({ msg: "berhasil di hapus" });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-const getBarangSerch = async (req, res) => {
-  const search = req.query.search_query || "";
-  const result = await DataBarang.findAll({
-    where: {
-      [Op.or]: [
-        {
-          nama: {
-            [Op.like]: "%" + search + "%",
-          },
-        },
-      ],
-    },
-  });
-  res.json({
-    result: result,
-  });
-};
+//   const { nama, jenis, stok, bahan } = req.body;
+//   try {
+//     await DataBarang.update(
+//       { nama: nama, jenis: jenis, stok: stok, bahan: bahan },
+//       {
+//         where: {
+//           id: req.params.id,
+//         },
+//       }
+//     );
+//     res.status(200).json({ msg: "berhasil di update" });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+// const delBarang = async (req, res) => {
+//   const product = await DataBarang.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   });
+//   if (!product) return res.status(404).json({ msg: "No data" });
+//   try {
+//     await DataBarang.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     res.status(200).json({ msg: "berhasil di hapus" });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+// const getBarangSerch = async (req, res) => {
+//   const search = req.query.search_query || "";
+//   const result = await DataBarang.findAll({
+//     where: {
+//       [Op.or]: [
+//         {
+//           nama: {
+//             [Op.like]: "%" + search + "%",
+//           },
+//         },
+//       ],
+//     },
+//   });
+//   res.json({
+//     result: result,
+//   });
+// };
 
 //jenis
 const setJenis = async (req, res) => {
@@ -944,10 +944,10 @@ app.post("/login", Login);
 app.get("/token", refreshToken);
 app.delete("/logout", Logout);
 
-app.post("/Barang", verifyToken, setBarang);
-app.patch("/Barang/:id", verifyToken, updateBarang);
-app.delete("/Barang/:id", verifyToken, delBarang);
-app.get("/Barang/serch", verifyToken, getBarangSerch);
+// app.post("/Barang", verifyToken, setBarang);
+// app.patch("/Barang/:id", verifyToken, updateBarang);
+// app.delete("/Barang/:id", verifyToken, delBarang);
+// app.get("/Barang/serch", verifyToken, getBarangSerch);
 
 // app.post("/Bahanbaku", verifyToken, SetBahanbaku);
 // app.patch("/Bahanbaku/:id", verifyToken, UpdateBahanbaku);
