@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 // import db from "../config/index.js";
-import bcrypt from "bcryptjs";
-import { Op } from "sequelize";
-import jwt from "jsonwebtoken";
+// import bcrypt from "bcryptjs";
+// import { Op } from "sequelize";
+// import jwt from "jsonwebtoken";
 // import {
 //   BahanBaku,
 //   DataBarang,
