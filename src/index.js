@@ -949,10 +949,10 @@ app.patch("/Barang/:id", verifyToken, updateBarang);
 app.delete("/Barang/:id", verifyToken, delBarang);
 app.get("/Barang/serch", verifyToken, getBarangSerch);
 
-app.post("/Bahanbaku", verifyToken, SetBahanbaku);
-app.patch("/Bahanbaku/:id", verifyToken, UpdateBahanbaku);
-app.delete("/Bahanbaku/:id", verifyToken, DelBahanbaku);
-app.get("/Bahanbaku/serch", verifyToken, GetBahanbakuSerch);
+// app.post("/Bahanbaku", verifyToken, SetBahanbaku);
+// app.patch("/Bahanbaku/:id", verifyToken, UpdateBahanbaku);
+// app.delete("/Bahanbaku/:id", verifyToken, DelBahanbaku);
+// app.get("/Bahanbaku/serch", verifyToken, GetBahanbakuSerch);
 
 app.post("/Jenis", verifyToken, setJenis);
 app.patch("/Jenis/:id", verifyToken, updateJenis);
