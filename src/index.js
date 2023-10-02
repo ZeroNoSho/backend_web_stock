@@ -6,15 +6,15 @@ import db from "../config/index.js";
 import bcrypt from "bcryptjs";
 import { Op } from "sequelize";
 import jwt from "jsonwebtoken";
-import {
-  BahanBaku,
-  DataBarang,
-  Jenis,
-  Produksi,
-  Transaksi,
-  Users,
-} from "../models/index.js";
-import { verifyToken } from "../middleware/index.js";
+// import {
+//   BahanBaku,
+//   DataBarang,
+//   Jenis,
+//   Produksi,
+//   Transaksi,
+//   Users,
+// } from "../models/index.js";
+// import { verifyToken } from "../middleware/index.js";
 import * as XLSX from "xlsx/xlsx.mjs";
 import * as fs from "fs";
 XLSX.set_fs(fs);
